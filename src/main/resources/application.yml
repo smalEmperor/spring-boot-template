@@ -1,0 +1,88 @@
+server:
+  port: 8080
+  tomcat.uri-encoding: utf-8
+  servlet.context-path: /
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  shardingsphere:
+    datasource:
+      names: wpzd21,wpzmedical
+      wpzd21:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.1.192:3306/wpzd21?useUnicode=true&characterEncoding=utf8
+        username: root
+        password: 123456
+      wpzmedical:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.1.192:3306/wpzmedical??useUnicode=true&characterEncoding=utf8
+        username: root
+        password: 123456
+      #type: com.zaxxer.hikari.HikariDataSource
+      #hikari:
+        #minimum-idle: 5
+        #maximum-pool-size: 15
+        #auto-commit: true
+        #idle-timeout: 30000
+        #pool-name: DatebookHikariCP
+        #max-lifetime: 1800000
+        #connection-timeout: 10000
+        #connection-test-query: SELECT 1
+    sharding:
+      tables:
+        kaba_user:
+          actual-data-nodes: wpzd21.kaba_user
+        kaba_medical_operation:
+          actual-data-nodes: wpzmedical.kaba_medical_operation
+  #data:
+    #mongodb:
+      #uri: mongodb://localhost:27017/mydb
+    #elasticsearch:
+      #cluster-name: elasticsearch
+      #cluster-nodes: 127.0.0.1:9300
+      #properties:
+        #path:
+          #logs: ./elasticsearch/logs
+          #data: ./elasticsearch/data
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    cache: false
+  mvc:
+    favicon:
+      enabled: false
+  #redis:
+    #host: 192.168.19.128
+    #port: 6379
+    #password:
+    #timeout: 10000ms
+    #database: 0
+    #lettuce:
+      #pool:
+        #max-active: 8
+        #max-wait: -1
+        #max-idle: 8
+        #min-idle: 0
+
+    #static-path-pattern: /**
+  #resources:
+  #static-locations: classpath:/templates/,classpath:/static/
+
+#mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.easicare.device.entity
+
+logging:
+  config: classpath:logback-spring.xml
+
+
