@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
         Set<ConstraintViolation<?>> violations = exception.getConstraintViolations();
         StringBuilder errorInfo = new StringBuilder();
         for (ConstraintViolation<?> item : violations) {
-            errorInfo.append("参数").append(item.getMessage()).append("，");
+            errorInfo.append("参数").append(item.getMessage()).append("不能为空").append(",");
         }
         return BaseResult.requestErr(Result.BAD_REQUEST, errorInfo.toString());
     }
@@ -39,7 +39,7 @@ public class GlobalExceptionHandler {
         BindingResult bindingResult = e.getBindingResult();
         StringBuilder errorMesssage = new StringBuilder();
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
-            errorMesssage.append("参数").append(fieldError.getDefaultMessage()).append("，");
+            errorMesssage.append("参数").append(fieldError.getDefaultMessage()).append("不能为空").append(",");
         }
         return BaseResult.requestErr(Result.BAD_REQUEST, errorMesssage.toString());
     }

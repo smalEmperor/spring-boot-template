@@ -26,7 +26,7 @@ public class ValidatorConfig {
 
     /**
      * false和true区别
-     * true 全部参数验证 false只要有一个参数验证不通过，其他参数跳过在，直接抛出异常
+     * false 全部参数验证 true只要有一个参数验证不通过，其他参数跳过，直接抛出异常
      */
     @Bean
     public Validator validator(){
