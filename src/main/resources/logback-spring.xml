@@ -31,6 +31,7 @@
         </encoder>
     </appender>
 
+    <!-- 需要修改包名 -->
     <logger name="com.easicare.device.mapper" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>

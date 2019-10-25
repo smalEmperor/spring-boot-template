@@ -24,6 +24,10 @@ public class ValidatorConfig {
         return postProcessor;
     }
 
+    /**
+     * false和true区别
+     * true 全部参数验证 false只要有一个参数验证不通过，其他参数跳过在，直接抛出异常
+     */
     @Bean
     public Validator validator(){
         ValidatorFactory validatorFactory = Validation.byProvider( HibernateValidator.class )

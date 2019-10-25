@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author df
  * @date 2019/8/6
  */
-//@EnableApi2Doc
 @SpringBootApplication
 @EnableTransactionManagement    //开启事务
 public class Application {
