@@ -1,5 +1,6 @@
 package com.easicare.device.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.easicare.device.entity.KabaMedicalOperation;
 
 import java.util.List;
@@ -21,5 +22,7 @@ public interface KabaMedicalOperationService {
      * @param kabaMedicalOperation
      */
     List<KabaMedicalOperation> getMedicalOperationBySelect(KabaMedicalOperation kabaMedicalOperation);
+
+    IPage<KabaMedicalOperation> getMedicalOperationByPage();
 
 }

@@ -1,6 +1,8 @@
 package com.easicare.device.service.serviceimpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.easicare.device.entity.KabaMedicalOperation;
 import com.easicare.device.mapper.KabaMedicalOperationMapper;
@@ -34,12 +36,25 @@ public class KabaMedicalOperationServiceImpl extends ServiceImpl<KabaMedicalOper
     }
 
     /**
-     * 更具条件获取数据
+     * 根据条件获取数据
      * @param kabaMedicalOperation
      */
     @Override
     public List<KabaMedicalOperation> getMedicalOperationBySelect(KabaMedicalOperation kabaMedicalOperation) {
         return kabaMedicalOperationMapper.selectList(new QueryWrapper<>(kabaMedicalOperation));
+    }
+
+    /**
+     * 分页
+     */
+    @Override
+    public IPage<KabaMedicalOperation> getMedicalOperationByPage() {
+        IPage<KabaMedicalOperation> page = new Page<>(1, 10);
+       /* QueryWrapper<KabaMedicalOperation> wrapper = new QueryWrapper<>();
+        KabaMedicalOperation student = new KabaMedicalOperation();
+        student.setId(1L);
+        wrapper.setEntity(student);*/
+        return kabaMedicalOperationMapper.selectPage(page,null);
     }
 
 }

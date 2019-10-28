@@ -52,14 +52,14 @@ public class BaseResult implements Serializable {
      * 封装分页结果
      * @param data 数据
      */
-    public static Result requestSuccessPage(IPage<?> data){
+    public static Result requestSuccessPage(String message,IPage<?> data){
         Map<String, Object> resultObj = new HashMap<>(5);
         resultObj.put("pageNum",data.getCurrent());
         resultObj.put("pageSize",data.getSize());
         resultObj.put("totalCount",data.getTotal());
         resultObj.put("totalPage",data.getPages());
         resultObj.put("records", data.getRecords());
-        return  new Result(Result.SUCCESS, resultObj.toString());
+        return  new Result(Result.SUCCESS, message,resultObj);
     }
 
 }

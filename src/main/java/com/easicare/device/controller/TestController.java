@@ -1,6 +1,7 @@
 package com.easicare.device.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.easicare.device.common.BaseResult;
 import com.easicare.device.common.Result;
 import com.easicare.device.entity.KabaMedicalOperation;
@@ -78,6 +79,18 @@ public class TestController {
         result.put("medicalOperation",medicalOperation);
         result.put("user",user);
         return BaseResult.requestSuccess("数据获取成功",result);
+    }
+
+    /**
+     * 测试mybatisplus分页
+     * @return
+     */
+    @ApiOperation("根据id查询用户数据和操作记录")
+    @GetMapping("/medicalOperationPage")
+    @ResponseBody
+    public Result medicalOperationPage() {
+        IPage<KabaMedicalOperation> medicalOperation = kabaMedicalOperationServiceImpl.getMedicalOperationByPage();
+        return BaseResult.requestSuccessPage("数据获取成功",medicalOperation);
     }
 
     /**
