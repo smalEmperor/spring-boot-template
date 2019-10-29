@@ -1,50 +1,11 @@
 server:
-  port: 8080
+  port: 8086
   tomcat.uri-encoding: utf-8
   servlet.context-path: /
 
 spring:
-  main:
-    allow-bean-definition-overriding: true
-  shardingsphere:
-    datasource:
-      names: wpzd21,wpzmedical,news
-      wpzd21:
-        type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.jdbc.Driver
-        jdbc-url: jdbc:mysql://192.168.1.192:3306/wpzd21?useUnicode=true&characterEncoding=utf8
-        username: root
-        password: 123456
-      wpzmedical:
-        type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.jdbc.Driver
-        jdbc-url: jdbc:mysql://192.168.1.192:3306/wpzmedical??useUnicode=true&characterEncoding=utf8
-        username: root
-        password: 123456
-      news:
-        type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.jdbc.Driver
-        jdbc-url: jdbc:mysql://192.168.1.192:3306/news?useUnicode=true&characterEncoding=utf8
-        username: root
-        password: 123456
-    sharding:
-      tables:
-        kaba_user:
-          actual-data-nodes: wpzd21.kaba_user
-        kaba_medical_operation:
-          actual-data-nodes: wpzmedical.kaba_medical_operation
-        news:
-          actual-data-nodes: news.news
-  #data:
-    #mongodb:
-      #uri: mongodb://localhost:27017/mydb
-    #elasticsearch:
-      #cluster-name: elasticsearch
-      #cluster-nodes: 127.0.0.1:9300
-      #properties:
-        #path:
-          #logs: ./elasticsearch/logs
-          #data: ./elasticsearch/data
+  profiles:
+    active: prod
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
@@ -53,18 +14,6 @@ spring:
   mvc:
     favicon:
       enabled: false
-  #redis:
-    #host: 192.168.19.128
-    #port: 6379
-    #password:
-    #timeout: 10000ms
-    #database: 0
-    #lettuce:
-      #pool:
-        #max-active: 8
-        #max-wait: -1
-        #max-idle: 8
-        #min-idle: 0
 
 #mybatis-plus
 mybatis-plus:
