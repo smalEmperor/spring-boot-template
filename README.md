@@ -2,7 +2,7 @@
 + mybatis-plus(mybatis-plus-boot-starter 3.2.0) 
 + sharding-jdbc(sharding-jdbc-spring-boot-starter 4.0.0-RC1)分库分表中间件 
 + lombok(简化实体bean和日志开发) 
-+ swagger(接口文档生成工具,只在开发阶段使用，项目发布或者上线，去掉swagger相关jar包和配置)          
++ swagger(接口文档生成工具,只在开发阶段使用，项目发布或者上线，去掉swagger相关jar包和配置代码)          
 + thymeleaf模板引擎
 + hibernate validator(参数效验工具 spring boot默认依赖) 
 + 缓存使用redis的Lettuce客户端(spring boot 默认缓存实现,其他缓存实现自行配置)
