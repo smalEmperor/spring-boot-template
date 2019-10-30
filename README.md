@@ -7,10 +7,12 @@
 + hibernate validator(参数效验工具 spring boot默认依赖) 
 + 缓存使用redis的Lettuce客户端(spring boot 默认缓存实现,其他缓存实现自行配置)
 
-统一数据返回请使用封装的工具类
+统一数据返回请使用封装的工具类,test包下包含有代码生成,请自行选择配置使用
 
 使用jdk8编译运行,有关时间的操作请使用jdk的时间api,时间操作工具类DateUtil
 
 接口文档访问地址：http://ip:port/doc.html
 
 请修改包名device
+
+此模板项目只做统一开发环境，简化代码开发之用，不做技术强制使用，关于技术选型，如果你有更好的选择，请自行选择使用
