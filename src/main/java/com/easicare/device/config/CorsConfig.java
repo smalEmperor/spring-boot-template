@@ -31,7 +31,7 @@ public class CorsConfig {
                 String method = request.getMethod();
 
                 response.setHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
-                response.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE");
+                response.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE,PUT");
                 response.setHeader("Access-Control-Max-Age", Long.toString(60 * 60));
                 response.setHeader("Access-Control-Allow-Credentials", "true");
                 response.setHeader("Access-Control-Allow-Headers", "token,Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");

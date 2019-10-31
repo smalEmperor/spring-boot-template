@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.easicare.device.entity.validgroup.UserEditValidGroup;
 import com.easicare.device.entity.validgroup.UserLoginValidGroup;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,10 +17,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @TableName("kaba_user")
-public class KabaUser implements Serializable {
+public class KabaUser extends BaseEntity implements Serializable {
     @TableId(type= IdType.AUTO)
-    @ApiModelProperty(value = "id")
-    private Long id;
     private String code;
     private Long roleId;
     private Integer isFamilyadmin;
@@ -52,10 +49,4 @@ public class KabaUser implements Serializable {
     private Byte useStatus;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private LocalDateTime lastloginTime;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private LocalDateTime createTime;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private LocalDateTime lastTime;
-
-    private Byte active;
 }
