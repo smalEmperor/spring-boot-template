@@ -39,7 +39,7 @@ public class MyHandlerInterceptorConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
-        registry.addResourceHandler("/favicon.ico")
+        registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");
 
     }

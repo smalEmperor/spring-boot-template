@@ -1,6 +1,5 @@
 package com.easicare.device.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -21,8 +20,8 @@ import java.io.IOException;
 @Configuration
 public class CorsConfig {
     @Bean
-    FilterRegistrationBean<Filter> corsFilter(@Value("*") String origin) {
-        return new FilterRegistrationBean<Filter>(new Filter() {
+    FilterRegistrationBean<Filter> corsFilter() {
+        return new FilterRegistrationBean<>(new Filter() {
             @Override
             public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
                     throws IOException, ServletException {
