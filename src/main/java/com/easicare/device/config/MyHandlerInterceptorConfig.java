@@ -29,6 +29,7 @@ public class MyHandlerInterceptorConfig implements WebMvcConfigurer {
         registry.addInterceptor(handlerInterceptor).addPathPatterns("/**")
                 .excludePathPatterns("/login/**")
                 .excludePathPatterns("/*.html")
+                .excludePathPatterns("/static/**")
                 .excludePathPatterns("/webjars/**")
                 .excludePathPatterns("//swagger-resources/**");
     }
@@ -38,7 +39,9 @@ public class MyHandlerInterceptorConfig implements WebMvcConfigurer {
         registry.addResourceHandler("doc.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+                .addResourceLocations("classpath:/META-INF/resources/webjars/")
+                //生产时建议开启缓存（只是缓存了资源路径而不是资源内容）,开发是可以设置为false
+                .resourceChain(true);
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");
 
