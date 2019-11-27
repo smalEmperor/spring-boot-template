@@ -56,7 +56,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NoHandlerFoundException.class)
     public Result handlerNoFoundException(Exception e) {
-        return BaseResult.requestErr(404, "路径不存在，请检查路径是否正确");
+        // web返回错误页面
+         /* ModelAndView mv = new ModelAndView();
+        mv.addObject("系统繁忙,请稍后再试");
+        mv.setViewName("err");
+        return mv;*/
+         // 接口返回提示
+        return BaseResult.requestErr(404, "路径不存在,请检查路径是否正确");
     }
 
     @ExceptionHandler(Exception.class)

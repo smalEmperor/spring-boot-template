@@ -11,9 +11,14 @@ spring:
     suffix: .html
     mode: HTML
     cache: false
+  resources:
+    add-mappings: false
+    static-locations: classpath:/static/
   mvc:
     favicon:
       enabled: false
+    throw-exception-if-no-handler-found: true
+    static-path-pattern: /**
   jackson:
     default-property-inclusion: non_empty
 
@@ -21,6 +26,10 @@ spring:
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
   type-aliases-package: com.easicare.device.entity
+  global-config:
+    db-config:
+      logic-delete-value: 0      #逻辑删除判断
+      logic-not-delete-value: 1
 
 logging:
   config: classpath:logback-spring.xml
