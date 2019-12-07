@@ -36,7 +36,7 @@
     <logger name="com.easicare.device.mapper" level="DEBUG" additivity="false">
         <!-- 控制台输出,开发需要 -->
         <appender-ref ref="STDOUT"/>
-        <!-- 文件输出,开发需要 -->
+        <!-- 文件输出,线上需要 -->
         <!--<appender-ref ref="FILE"/>-->
     </logger>
 
@@ -44,7 +44,7 @@
     <root level="INFO">
         <!-- 控制台输出,开发需要 -->
         <appender-ref ref="STDOUT"/>
-        <!-- 文件输出,开发需要 -->
+        <!-- 文件输出,线上需要 -->
         <!--<appender-ref ref="FILE"/>-->
     </root>
 

@@ -27,6 +27,9 @@ spring:
         jdbc-url: jdbc:mysql://192.168.1.192:3306/news?useUnicode=true&characterEncoding=utf8
         username: root
         password: 123456
+      hikari:
+        validation-query: SELECT 1
+        time-between-eviction-runs-millis: 18800
     sharding:
       tables:
         kaba_user:
