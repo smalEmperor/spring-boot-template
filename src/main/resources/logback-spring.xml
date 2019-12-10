@@ -5,7 +5,9 @@
 <!-- debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
 <configuration debug="false" scan="false">
     <springProperty scop="context" name="spring.application.name" source="spring.application.name" defaultValue="springboottemplate"/>
+    <!--项目日志文件位置设置,比如项目jar包放到/home目录下，新建项目文件(和项目名一致),那么以下value值应该以/home/项目目录/logs,避免日志文件出现在根目录或者找不到的情况-->
     <property name="LOG_HOME" value="/springboottemplate/logs" />
+
     <!-- 控制台输出,开发需要 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -36,7 +38,7 @@
     <logger name="com.easicare.device.mapper" level="DEBUG" additivity="false">
         <!-- 控制台输出,开发需要 -->
         <appender-ref ref="STDOUT"/>
-        <!-- 文件输出,线上需要 -->
+        <!-- 文件输出,确定线上日志是否需要sql语句的打印信息，再确定是否需要 -->
         <!--<appender-ref ref="FILE"/>-->
     </logger>
 
