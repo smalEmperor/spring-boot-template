@@ -48,15 +48,14 @@ spring:
       #path:
         #logs: ./elasticsearch/logs
         #data: ./elasticsearch/data
-  #redis:
-    #host: 192.168.19.128
-    #port: 6379
-    #password:
-    #timeout: 10000ms
-    #database: 0
-    #lettuce:
-      #pool:
-        #max-active: 8
-        #max-wait: -1
-        #max-idle: 8
-        #min-idle: 0
+  redis:
+    host: 192.168.1.161
+    port: 6378
+    password: 123456
+    timeout: 10000ms
+    database: 1
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0

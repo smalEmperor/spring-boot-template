@@ -30,6 +30,7 @@ mybatis-plus:
     db-config:
       logic-delete-value: 0      #逻辑删除判断
       logic-not-delete-value: 1
+    banner: false
 
 logging:
   config: classpath:logback-spring.xml

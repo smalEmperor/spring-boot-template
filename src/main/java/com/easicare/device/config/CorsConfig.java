@@ -16,7 +16,6 @@ import java.io.IOException;
  * @author df
  * @date 2019/8/6
  */
-@EnableAutoConfiguration
 @Configuration
 public class CorsConfig {
     @Bean

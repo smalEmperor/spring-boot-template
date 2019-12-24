@@ -5,6 +5,7 @@ import com.easicare.device.entity.KabaUser;
 import com.easicare.device.mapper.KabaUserMapper;
 import com.easicare.device.service.KabaUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,6 +27,7 @@ public class KabaUserServiceImpl extends ServiceImpl<KabaUserMapper, KabaUser> i
      * @param id 处理过的数据id
      */
     @Override
+    @Cacheable(value = "userCache",key = "#id")
     public KabaUser getUser(Long id) {
         return kabaUserMapper.selectById(id);
     }

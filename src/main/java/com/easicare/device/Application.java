@@ -2,7 +2,7 @@ package com.easicare.device;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * 项目启动类
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @date 2019/8/6
  */
 @SpringBootApplication
-@EnableTransactionManagement    //开启事务
+@EnableCaching
 public class Application {
 
     public static void main(String[] args) {

@@ -1,8 +1,8 @@
 package com.easicare.device.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.easicare.device.common.BaseResult;
+import com.easicare.device.common.RedisUtil;
 import com.easicare.device.common.Result;
 import com.easicare.device.entity.KabaMedicalOperation;
 import com.easicare.device.entity.KabaUser;
@@ -16,9 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 测试使用Controller,根据业务自行修改
@@ -31,6 +34,8 @@ import java.util.List;
 @Controller
 public class TestController {
 
+    private  static int expireTime = 60;// redis中存储的过期时间 60s
+
     private final KabaMedicalOperationService kabaMedicalOperationServiceImpl;
 
     private final KabaUserService kabaUserServiceImpl;
@@ -41,6 +46,9 @@ public class TestController {
         this.kabaMedicalOperationServiceImpl = kabaMedicalOperationServiceImpl;
         this.kabaUserServiceImpl = kabaUserServiceImpl;
     }
+
+    @Resource
+    private RedisUtil redisUtil;
 
     /**
      * 测试sharding jdbc单库操作
@@ -53,9 +61,7 @@ public class TestController {
     public Result medicalOperations(@Valid  @RequestBody KabaMedicalOperation kabaMedicalOperation) {
         List<KabaMedicalOperation> result = kabaMedicalOperationServiceImpl.getMedicalOperationBySelect(kabaMedicalOperation);
         if (result != null) {
-            JSONObject data = new JSONObject();
-            data.put("data",result);
-            return BaseResult.requestSuccess("数据获取成功",data);
+            return BaseResult.requestSuccess("数据获取成功",result);
         } else {
             // 测试使用
             log.info("数据获取失败");
@@ -75,10 +81,22 @@ public class TestController {
     public Result medicalOperationAndUser(@NotNull(message = "userId") Long userId, @NotNull(message = "id") Long id) {
         KabaMedicalOperation medicalOperation = kabaMedicalOperationServiceImpl.getMedicalOperationById(id);
         KabaUser user =  kabaUserServiceImpl.getUser(userId);
-        JSONObject result = new JSONObject();
+        Map<String, Object> result = new HashMap<>();
         result.put("medicalOperation",medicalOperation);
         result.put("user",user);
         return BaseResult.requestSuccess("数据获取成功",result);
+    }
+
+    /**
+     * 测试sharding jdbc跨库操作
+     * @param id
+     * @return
+     */
+    @GetMapping("/user")
+    @ResponseBody
+    public Result getUser(@NotNull(message = "id") Long id) {
+        KabaUser user =  kabaUserServiceImpl.getUser(id);
+        return BaseResult.requestSuccess("数据获取成功",user);
     }
 
     /**
@@ -100,6 +118,36 @@ public class TestController {
     @RequestMapping("/hello")
     public String hello() {
         return "hello";
+    }
+
+
+    @GetMapping("/setString")
+    @ResponseBody
+    public boolean redisSetString(){
+        KabaUser user = new KabaUser();
+        user.setId(15L);
+        user.setUserEmail("0015");
+        user.setUserName("BlaineLi");
+        return redisUtil.set("userBean",user);
+    }
+
+    @RequestMapping("get/{key}")
+    @ResponseBody
+    public Object redisGet(@PathVariable("key") String key){
+        return redisUtil.get(key);
+    }
+
+    @RequestMapping("expire/{key}")
+    @ResponseBody
+    public boolean expire(@PathVariable("key") String key){
+        return redisUtil.expire(key,expireTime);
+    }
+
+
+    @RequestMapping("expire/get/{key}")
+    @ResponseBody
+    public Long getExpire(@PathVariable("key") String key){
+        return redisUtil.getExpire(key );
     }
 
 }
