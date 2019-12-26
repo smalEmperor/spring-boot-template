@@ -124,10 +124,10 @@ public class TestController {
     @GetMapping("/setString")
     @ResponseBody
     public boolean redisSetString(){
-        KabaUser user = new KabaUser();
-        user.setId(15L);
-        user.setUserEmail("0015");
-        user.setUserName("BlaineLi");
+        KabaUser user = KabaUser.builder().id(15L)
+                .userEmail("0015")
+                .userName("BlaineLi")
+                .build();
         return redisUtil.set("userBean",user);
     }
 
