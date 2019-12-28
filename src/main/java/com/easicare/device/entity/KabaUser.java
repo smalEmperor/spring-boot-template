@@ -35,11 +35,11 @@ public class KabaUser implements Serializable {
     private String userNameInitial;
     private String userNickname;
     private String userRealname;
-    @NotBlank(message = "userPassword", groups = { UserLoginValidGroup.class, UserEditValidGroup.class })
+    @NotBlank(message = "userPassword必须有字符", groups = { UserLoginValidGroup.class, UserEditValidGroup.class })
     private String userPassword;
-    @NotBlank(message = "userEmail", groups = { UserLoginValidGroup.class, UserEditValidGroup.class })
+    @NotBlank(message = "userEmail必须有字符", groups = { UserLoginValidGroup.class, UserEditValidGroup.class })
     private String userEmail;
-    @NotBlank(message = "userPhone", groups = { UserLoginValidGroup.class, UserEditValidGroup.class })
+    @NotBlank(message = "userPhone必须有字符", groups = { UserLoginValidGroup.class, UserEditValidGroup.class })
     private String userPhone;
     private String userIdcard;
     private Long userBankcard;

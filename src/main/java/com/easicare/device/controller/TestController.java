@@ -78,7 +78,7 @@ public class TestController {
     @ApiOperation("根据id查询用户数据和操作记录")
     @GetMapping("/medicalOperationAndUser")
     @ResponseBody
-    public Result medicalOperationAndUser(@NotNull(message = "userId") Long userId, @NotNull(message = "id") Long id) {
+    public Result medicalOperationAndUser(@NotNull(message = "userId不能为空") Long userId, @NotNull(message = "id不能为空") Long id) {
         KabaMedicalOperation medicalOperation = kabaMedicalOperationServiceImpl.getMedicalOperationById(id);
         KabaUser user =  kabaUserServiceImpl.getUser(userId);
         Map<String, Object> result = new HashMap<>();
@@ -94,7 +94,7 @@ public class TestController {
      */
     @GetMapping("/user")
     @ResponseBody
-    public Result getUser(@NotNull(message = "id") Long id) {
+    public Result getUser(@NotNull(message = "id不能为空") Long id) {
         KabaUser user =  kabaUserServiceImpl.getUser(id);
         return BaseResult.requestSuccess("数据获取成功",user);
     }

@@ -3,12 +3,12 @@ package com.easicare.device.config;
 import com.easicare.device.common.BaseResult;
 import com.easicare.device.common.CustomException;
 import com.easicare.device.common.Result;
-import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
@@ -24,26 +24,43 @@ import java.util.Set;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Result handle(ConstraintViolationException exception) {
-        Set<ConstraintViolation<?>> violations = exception.getConstraintViolations();
+    /**
+     * 这里是处理 @PathVariable和@RequestParam 验证不通过抛出的异常
+     */
+    @ExceptionHandler(ConstraintViolationException.class)
+    public Result handle(ConstraintViolationException ex) {
+        Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
         StringBuilder errorInfo = new StringBuilder();
         for (ConstraintViolation<?> item : violations) {
-            errorInfo.append("参数").append(item.getMessage()).append("不能为空").append(",");
+            errorInfo.append("参数").append(item.getMessage()).append(";");
         }
         return BaseResult.requestErr(Result.BAD_REQUEST, errorInfo.toString());
     }
 
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    /**
+     * 这里处理@RequestBody,验证不通过抛出的异常
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public Result handle(MethodArgumentNotValidException e) {
         BindingResult bindingResult = e.getBindingResult();
         StringBuilder errorMesssage = new StringBuilder();
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
-            errorMesssage.append("参数").append(fieldError.getDefaultMessage()).append("不能为空").append(",");
+            errorMesssage.append("参数").append(fieldError.getDefaultMessage()).append(";");
         }
         return BaseResult.requestErr(Result.BAD_REQUEST, errorMesssage.toString());
+    }
+
+    /**
+     * 这里处理Get请求多参数实体封装,验证不通过抛出的异常
+     */
+    @ExceptionHandler(BindException.class)
+    public Result handleBindException(BindException e){
+        BindingResult bindingResult = e.getBindingResult();
+        StringBuilder errorMsg = new StringBuilder();
+        for (ObjectError error : bindingResult.getAllErrors()) {
+            errorMsg.append("参数").append(error.getDefaultMessage()).append(";");
+        }
+        return  BaseResult.requestErr(Result.BAD_REQUEST,errorMsg.toString());
     }
 
     /**

@@ -33,10 +33,10 @@ public class KabaMedicalOperation implements Serializable {
 
     private Byte operateType;
 
-    @NotBlank(message = "operator")
+    @NotBlank(message = "operator必须有字符")
     private String operator;
 
-    @NotBlank(message = "operateTable")
+    @NotBlank(message = "operateTable必须有字符")
     private String operateTable;
 
     private String operateRecord;
