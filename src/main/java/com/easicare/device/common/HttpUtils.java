@@ -48,8 +48,6 @@ public class HttpUtils {
         configBuilder.setSocketTimeout(MAX_TIMEOUT);
         // 设置从连接池获取连接实例的超时
         configBuilder.setConnectionRequestTimeout(MAX_TIMEOUT);
-        // 在提交请求之前 测试连接是否可用
-        configBuilder.setExpectContinueEnabled(true);
         requestConfig = configBuilder.build();
     }
 
