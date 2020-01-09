@@ -47,7 +47,11 @@ public class ApiAspectLogger {
      */
     @AfterReturning(value = "pointcut()", returning = "returnObj")
     public void afterReturn(Object returnObj) {
-        log.info("方法调用结果返回: "+returnObj.toString());
+        if (returnObj != null) {
+            log.info("方法调用结果返回: "+returnObj.toString());
+        } else {
+            log.info("方法没有返回值");
+        }
     }
 
     /**
