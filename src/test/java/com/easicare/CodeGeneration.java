@@ -70,10 +70,10 @@ public class CodeGeneration {
         pc.setParent("com.easicare.device");
         pc.setController("controller");
         pc.setService("service");
-        pc.setServiceImpl("service.serviceImpl");
+        pc.setServiceImpl("service.impl");
         pc.setMapper("mapper");
         pc.setEntity("entity");
-        pc.setXml("xml");
+        pc.setXml("mapper");
         mpg.setPackageInfo(pc);
 
         // 执行生成
