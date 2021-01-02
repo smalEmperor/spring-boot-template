@@ -59,15 +59,13 @@ public class CodeGeneration {
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
         //strategy.setInclude(new String[] { "sys_user" }); // 需要生成的表
 
-        strategy.setSuperServiceClass(null);
-        strategy.setSuperServiceImplClass(null);
         strategy.setSuperMapperClass(null);
 
         mpg.setStrategy(strategy);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.easicare.device");
+        pc.setParent("com.template");
         pc.setController("controller");
         pc.setService("service");
         pc.setServiceImpl("service.impl");

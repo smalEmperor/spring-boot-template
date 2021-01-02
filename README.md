@@ -1,5 +1,5 @@
-+ spring boot 2.1.10版本(日志系统默认使用slf4j+logback(项目发布或者上线,去掉控制台日志打印),数据库连接池默认使用hikari,需要监控功能请自行配置Druid) 
-+ mybatis-plus(mybatis-plus-boot-starter 3.2.0) 
++ spring boot 2.2.7版本(日志系统默认使用slf4j+logback(项目发布或者上线,去掉控制台日志打印),数据库连接池默认使用hikari,需要监控功能请自行配置Druid) 
++ mybatis-plus(mybatis-plus-boot-starter 3.4.0) 
 + sharding-jdbc(sharding-jdbc-spring-boot-starter 4.0.0-RC1)分库分表中间件 
 + lombok(简化实体bean和日志开发) 
 + swagger(接口文档生成工具,只在开发阶段使用，项目发布或者上线，去掉swagger相关jar包和配置代码)          
@@ -13,7 +13,7 @@
 
 接口文档访问地址：http://ip:port/doc.html
 
-请修改包名device
+请修改包名
 
 此模板项目只做统一开发环境，简化代码开发之用，不做技术强制使用，关于技术选型，如果你有更好的选择，请自行选择使用
 

@@ -1,7 +1,14 @@
 server:
-  port: 8083
-  tomcat.uri-encoding: utf-8
+  port: 9000
   servlet.context-path: /
+  tomcat:
+    uri-encoding: UTF-8
+    #最小线程数，默认10
+    min-spare-threads: 100
+    #最大线程数，默认200
+    max-threads: 500
+    #最大等待队列长度，默认100
+    accept-count: 500
 
 spring:
   profiles:
@@ -15,8 +22,6 @@ spring:
     add-mappings: false
     static-locations: classpath:/static/
   mvc:
-    favicon:
-      enabled: false
     throw-exception-if-no-handler-found: true
     static-path-pattern: /**
   jackson:
@@ -25,12 +30,15 @@ spring:
 #mybatis-plus
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
-  type-aliases-package: com.easicare.device.entity
+  type-aliases-package: com.template.entity
   global-config:
     db-config:
       logic-delete-value: 0      #逻辑删除判断
       logic-not-delete-value: 1
     banner: false
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 logging:
   config: classpath:logback-spring.xml

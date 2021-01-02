@@ -35,7 +35,7 @@
     </appender>
 
     <!-- 需要修改包名 -->
-    <logger name="com.easicare.device.mapper" level="DEBUG" additivity="false">
+    <logger name="com.template.mapper" level="DEBUG" additivity="false">
         <!-- 控制台输出,开发需要 -->
         <appender-ref ref="STDOUT"/>
         <!-- 文件输出,确定线上日志是否需要sql语句的打印信息，再确定是否需要 -->
