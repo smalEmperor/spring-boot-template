@@ -123,6 +123,13 @@
             <version>2.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+            <version>1.3.5.RELEASE</version>
+        </dependency>
+
+
         <!--swagger 接口文档，测试使用，项目部署时连同启动类上的注解一起去掉-->
         <dependency>
             <groupId>io.springfox</groupId>

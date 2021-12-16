@@ -8,23 +8,17 @@ spring:
     allow-bean-definition-overriding: true
   shardingsphere:
     datasource:
-      names: wpzd21,wpzmedical,news
-      wpzd21:
+      names: monitor,mam
+      monitor:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://localhost:3306/wpzd21?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
+        jdbc-url: jdbc:mysql://localhost:3306/monitor?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
         username: root
         password: root
-      wpzmedical:
+      mam:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://localhost:3306/wpzmedical?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
-        username: root
-        password: root
-      news:
-        type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://localhost:3306/news?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
+        jdbc-url: jdbc:mysql://localhost:3306/mam?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
         username: root
         password: root
       hikari:
@@ -32,12 +26,11 @@ spring:
         time-between-eviction-runs-millis: 18800
     sharding:
       tables:
-        kaba_user:
-          actual-data-nodes: wpzd21.kaba_user
-        kaba_medical_operation:
-          actual-data-nodes: wpzmedical.kaba_medical_operation
-        news:
-          actual-data-nodes: news.news
+        resource_info:
+          actual-data-nodes: monitor.resource_info
+        app_info:
+          actual-data-nodes: mam.app_info
+
   #data:
     #mongodb:
       #uri: mongodb://localhost:27017/mydb

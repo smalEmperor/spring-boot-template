@@ -120,6 +120,15 @@ public class TestController {
         return "hello";
     }
 
+    /**
+     * 测试跳转页面
+     * @return
+     */
+    @RequestMapping("/index")
+    public String index() {
+        return "index";
+    }
+
 
     @GetMapping("/setString")
     @ResponseBody
