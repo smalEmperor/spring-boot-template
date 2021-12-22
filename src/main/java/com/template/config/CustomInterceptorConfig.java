@@ -34,7 +34,7 @@ public class CustomInterceptorConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("doc.html")
+        registry.addResourceHandler("index.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");

@@ -3,6 +3,7 @@ package com.template.config;
 import com.template.common.BaseResult;
 import com.template.common.BusinessException;
 import com.template.common.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -10,11 +11,13 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.Set;
+import java.util.StringJoiner;
 
 /**
  * 全局参数错误异常返回
@@ -22,6 +25,7 @@ import java.util.Set;
  * @date 2019/9/16
  */
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
     /**
@@ -30,10 +34,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     public Result handle(ConstraintViolationException ex) {
         Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
-        StringBuilder errorInfo = new StringBuilder();
+        StringJoiner errorInfo = new StringJoiner(",");
         for (ConstraintViolation<?> item : violations) {
-            errorInfo.append("参数").append(item.getMessage()).append(";");
+            errorInfo.add(item.getMessage());
         }
+        log.error("框架捕获到异常:[{}][{}]", Result.BAD_REQUEST, errorInfo);
         return BaseResult.requestErr(Result.BAD_REQUEST, errorInfo.toString());
     }
 
@@ -43,11 +48,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Result handle(MethodArgumentNotValidException e) {
         BindingResult bindingResult = e.getBindingResult();
-        StringBuilder errorMesssage = new StringBuilder();
-        for (FieldError fieldError : bindingResult.getFieldErrors()) {
-            errorMesssage.append("参数").append(fieldError.getDefaultMessage()).append(";");
+        StringJoiner errorMessage = new StringJoiner(",");
+        // 解析原错误信息，封装后返回，此处返回非法的字段名称，原始值，错误信息
+        for (FieldError error : bindingResult.getFieldErrors()) {
+            errorMessage.add(error.getDefaultMessage());
         }
-        return BaseResult.requestErr(Result.BAD_REQUEST, errorMesssage.toString());
+        log.error("框架捕获到异常:[{}][{}]", Result.BAD_REQUEST, errorMessage);
+        return BaseResult.requestErr(Result.BAD_REQUEST, errorMessage.toString());
     }
 
     /**
@@ -56,11 +63,20 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BindException.class)
     public Result handleBindException(BindException e){
         BindingResult bindingResult = e.getBindingResult();
-        StringBuilder errorMsg = new StringBuilder();
+        StringJoiner errorMsg = new StringJoiner(",");
         for (ObjectError error : bindingResult.getAllErrors()) {
-            errorMsg.append("参数").append(error.getDefaultMessage()).append(";");
+            errorMsg.add(error.getDefaultMessage());
         }
+        log.error("框架捕获到异常:[{}][{}]", Result.BAD_REQUEST, errorMsg);
         return  BaseResult.requestErr(Result.BAD_REQUEST,errorMsg.toString());
+    }
+
+    /**
+     * 这里处理上传文件大小验证
+     */
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public Result handlerMaxUploadSizeExceededException(MaxUploadSizeExceededException ex) {
+        return BaseResult.requestErr(Result.BAD_REQUEST, "上传文件大小不能超过100M");
     }
 
     /**
@@ -68,7 +84,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(BusinessException.class)
     public Result business(BusinessException ex) {
-        return new Result(Result.ERROR,ex.getMessage());
+        log.error("框架捕获到异常:[{}][{}]", ex.getCode(), ex.getMessage());
+        return new Result(ex.getCode(),ex.getMessage());
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
@@ -88,6 +105,7 @@ public class GlobalExceptionHandler {
         mv.addObject("系统繁忙,请稍后再试");
         mv.setViewName("err");
         return mv;*/
+        log.error("框架捕获到异常:[{}][{}]", e.getMessage(), e.getStackTrace());
         return BaseResult.requestErr(500, "系统繁忙,请稍后再试");
     }
 

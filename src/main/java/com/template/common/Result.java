@@ -1,6 +1,5 @@
 package com.template.common;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +7,7 @@ import java.io.Serializable;
 
 /**
  * 返回结果封装
+ *
  * @author df
  * @date 2019/8/6
  */
@@ -29,29 +29,33 @@ public class Result implements Serializable {
     public static final int BAD_REQUEST = 400;
     public static final int UNAUTHORIZED = 401;
     public static final int FORBINDDEN = 403;
-    public static final int ERROR= 500;
+    public static final int ERROR = 500;
     public static final int DATABASE_ERR = 512;
     public static final int DATABASE_SELECT_ERR = 513;
     public static final String SUCCESSMSG = "成功";
 
-    @ApiModelProperty(value = "状态码")
     private int code;
 
-    @ApiModelProperty(value = "说明信息")
     private String msg;
 
-    @ApiModelProperty(value = "数据")
     private Object data;
 
-    public Result(int code,String msg){
-        this.code=code;
-        this.msg=msg;
+    public Result(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+        this.data = null;
     }
 
-    public Result(int code,String msg,Object data){
-        this.code=code;
-        this.msg=msg;
-        this.data=data;
+    public Result(int code, Object data) {
+        this.code = code;
+        this.msg = "success";
+        this.data = data;
+    }
+
+    public Result(int code, String msg, Object data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
     }
 
 }

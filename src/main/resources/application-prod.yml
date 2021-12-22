@@ -8,17 +8,23 @@ spring:
     allow-bean-definition-overriding: true
   shardingsphere:
     datasource:
-      names: monitor,mam
-      monitor:
+      names: account,orders,stock
+      account:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://localhost:3306/monitor?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
+        jdbc-url: jdbc:mysql://localhost:3306/account?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
         username: root
         password: root
-      mam:
+      orders:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://localhost:3306/mam?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
+        jdbc-url: jdbc:mysql://localhost:3306/orders?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
+        username: root
+        password: root
+      stock:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/stock?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
         username: root
         password: root
       hikari:
@@ -26,29 +32,30 @@ spring:
         time-between-eviction-runs-millis: 18800
     sharding:
       tables:
-        resource_info:
-          actual-data-nodes: monitor.resource_info
-        app_info:
-          actual-data-nodes: mam.app_info
-
-  #data:
-    #mongodb:
-      #uri: mongodb://localhost:27017/mydb
-    #elasticsearch:
-      #cluster-name: elasticsearch
-      #cluster-nodes: 127.0.0.1:9300
-      #properties:
-      #path:
-        #logs: ./elasticsearch/logs
-        #data: ./elasticsearch/data
-#  redis:
-#    host: 192.168.1.161
-#    port: 6378
-#    password: 123456
-#    timeout: 10000ms
-#    database: 1
-#    lettuce:
-#      pool:
-#        max-active: 8
-#        max-idle: 8
-#        min-idle: 0
+        account:
+          actual-data-nodes: account.account
+        orders:
+          actual-data-nodes: orders.orders
+        stock:
+          actual-data-nodes: stock.stock
+#  data:
+#    mongodb:
+#      uri: mongodb://localhost:27017/mydb
+#    elasticsearch:
+#      cluster-name: elasticsearch
+#      cluster-nodes: 127.0.0.1:9300
+#      properties:
+#      path:
+#        logs: ./elasticsearch/logs
+#        data: ./elasticsearch/data
+  redis:
+    host: 172.16.20.74
+    port: 6379
+    password:
+    timeout: 10000ms
+    database: 1
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0

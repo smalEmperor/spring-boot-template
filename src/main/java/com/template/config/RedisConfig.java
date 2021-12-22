@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -20,14 +20,13 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
+    public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory connectionFactory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         ObjectMapper mapper = new ObjectMapper();
         template.setConnectionFactory(connectionFactory);
         //使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值（默认使用JDK的序列化方式）
         Jackson2JsonRedisSerializer serializer = new Jackson2JsonRedisSerializer(Object.class);
         mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         serializer.setObjectMapper(mapper);
         template.setValueSerializer(serializer);
         //使用StringRedisSerializer来序列化和反序列化redis的key值
@@ -43,7 +42,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * 对hash类型的数据操作
      * @param redisTemplate
      */
-    @Bean
+    @Bean(value = "hashRedis")
     public HashOperations<String,String,Object> hashOperations(RedisTemplate<String,Object> redisTemplate){
         return redisTemplate.opsForHash();
     }
@@ -53,7 +52,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * 对redis字符串类型数据操作
      * @param redisTemplate
      */
-    @Bean
+    @Bean(value = "stringRedis")
     public ValueOperations<String,Object> valueOperations(RedisTemplate<String,Object> redisTemplate){
         return redisTemplate.opsForValue();
     }
@@ -63,7 +62,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * 对链表类型的数据操作
      * @param redisTemplate
      */
-    @Bean
+    @Bean(value = "listRedis")
     public ListOperations<String,Object> listOperations(RedisTemplate<String,Object> redisTemplate){
         return redisTemplate.opsForList();
     }
@@ -73,7 +72,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * 对无序类型集合类型数据操作
      * @param redisTemplate
      */
-    @Bean
+    @Bean(value = "SetRedis")
     public SetOperations<String,Object> setOperations(RedisTemplate<String,Object> redisTemplate){
         return redisTemplate.opsForSet();
     }
@@ -82,7 +81,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * 对有序集合类型数据操作
      * @param redisTemplate
      */
-    @Bean
+    @Bean(value = "zsetRedis")
     public ZSetOperations<String,Object> zSetOperations(RedisTemplate<String,Object> redisTemplate){
         return redisTemplate.opsForZSet();
     }

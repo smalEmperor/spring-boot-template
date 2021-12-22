@@ -1,6 +1,7 @@
 package com.template.lock;
 
-import com.template.common.UnblockThreadPoolExecutor;
+
+import com.template.config.UnblockThreadPoolExecutor;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.locks.ReentrantLock;
