@@ -1,11 +1,10 @@
 package com.template.common;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
 
 /**
  * 返回结果封装工具类
@@ -13,71 +12,65 @@ import java.util.Map;
  * @author df
  * @date 2019/8/6
  */
+@Setter
+@Getter
 public class BaseResult implements Serializable {
 
     /**
-     * 返回成功结果集
+     * 返回码
      */
-    public static Result requestSuccess(Object data) {
-        return new Result(Result.SUCCESS, Result.SUCCESSMSG, data);
-    }
+    private Integer code;
 
     /**
-     * 返回成功结果
+     * 返回信息描述
      */
-    public static Result requestSuccess(String message) {
-        return new Result(Result.SUCCESS, message);
-    }
+    private String msg;
 
     /**
-     * 返回成功结果和对象
+     * 返回数据
      */
-    public static Result requestSuccess(String message, Object data) {
-        return new Result(Result.SUCCESS, message, data);
-    }
+    private Object data;
 
     /**
-     * 返回失败结果集
+     * 时间
      */
-    public static Result requestErr(String message) {
-        return new Result(Result.ERROR, message);
+    private LocalDateTime time;
+
+
+    public BaseResult(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+        this.data = null;
+        this.time = LocalDateTime.now();
     }
 
-    /**
-     * 自定义返回码失败结果集
-     */
-    public static Result requestErr(int errCode, String message) {
-        return new Result(errCode, message);
+    public BaseResult(int code, Object data) {
+        this.code = code;
+        this.msg = Result.SUCCESS.getMsg();
+        this.data = data;
+        this.time = LocalDateTime.now();
     }
 
-    /**
-     * 封装分页结果
-     *
-     * @param data 数据
-     */
-    public static Result requestSuccessPage(IPage<?> data) {
-        Map<String, Object> resultObj = new HashMap<>(8);
-        resultObj.put("pageNum", data.getCurrent());
-        resultObj.put("pageSize", data.getSize());
-        resultObj.put("total", data.getTotal());
-        resultObj.put("pages", data.getPages());
-        resultObj.put("list", data.getRecords());
-        return new Result(Result.SUCCESS, resultObj);
+    public BaseResult(int code, String msg, Object data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+        this.time = LocalDateTime.now();
     }
 
-    /**
-     * 封装分页结果
-     *
-     * @param data 数据
-     */
-    public static Result requestSuccessPage(IPage<?> data, List<?> list) {
-        Map<String, Object> resultObj = new HashMap<>(8);
-        resultObj.put("pageNum", data.getCurrent());
-        resultObj.put("pageSize", data.getSize());
-        resultObj.put("totalCount", data.getTotal());
-        resultObj.put("totalPage", data.getPages());
-        resultObj.put("records", list);
-        return new Result(Result.SUCCESS, resultObj);
+    public BaseResult(Object data) {
+        this.code = Result.SUCCESS.getCode();
+        this.msg = Result.SUCCESS.getMsg();
+        this.data = data;
+        this.time = LocalDateTime.now();
+    }
+
+    public static BaseResult create(int code, String msg, Object data) {
+        return new BaseResult(code, msg, data);
+    }
+
+    public static BaseResult create(int code, Object data) {
+        return new BaseResult(code, Result.SUCCESS.getMsg(), data);
     }
 
 }

@@ -25,25 +25,38 @@ public class ElasticConfig {
     @Bean(name = "restClient")
     public RestHighLevelClient restClient() {
 
+        //新建host
         HttpHost httpHost = new HttpHost("172.16.20.74", 9200);
 
+        //如ES设置了帐号密码，则需要提供登录令牌
+        //final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        //credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(username,password));
+
+        //创建client实例，host可以有多个，对应集群的情况
         RestClientBuilder builder = RestClient.builder(httpHost);
+
         //失败重试超时时间
         //builder.setMaxRetryTimeoutMillis(5 * 60 * 1000);
 
         // 异步httpclient连接延时配置
         builder.setRequestConfigCallback(requestConfigBuilder -> {
             //TODO 超时 设置 在 版本 7.x 才生效
-            requestConfigBuilder.setConnectTimeout(30000);// 连接超时时间
-            requestConfigBuilder.setSocketTimeout(300 * 1000);//更改客户端的超时限制默认30秒现在改为5分钟
-            requestConfigBuilder.setConnectionRequestTimeout(30000);// 获取连接的超时时间
+            // 连接超时时间
+            requestConfigBuilder.setConnectTimeout(30000);
+            //更改客户端的超时限制默认30秒现在改为5分钟
+            requestConfigBuilder.setSocketTimeout(300 * 1000);
+            // 获取连接的超时时间
+            requestConfigBuilder.setConnectionRequestTimeout(30000);
             return requestConfigBuilder;
         });
 
         // 异步httpclient连接数配置
         builder.setHttpClientConfigCallback(httpClientBuilder -> {
-            httpClientBuilder.setMaxConnTotal(100);// 最大连接数
-            httpClientBuilder.setMaxConnPerRoute(100);// 最大路由连接数
+            //httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+            // 最大连接数
+            httpClientBuilder.setMaxConnTotal(100);
+            // 最大路由连接数
+            httpClientBuilder.setMaxConnPerRoute(100);
             return httpClientBuilder;
         });
 

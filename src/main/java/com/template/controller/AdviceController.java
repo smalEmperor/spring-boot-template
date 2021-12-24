@@ -1,7 +1,7 @@
 package com.template.controller;
 
 import com.template.common.BaseResult;
-import com.template.common.Result;
+import com.template.common.ResultUtil;
 import com.template.entity.AccountTbl;
 import com.template.entity.OrderTbl;
 import com.template.entity.StockTbl;
@@ -53,24 +53,22 @@ public class AdviceController {
      * 测试sharding jdbc单库操作
      */
     @PostMapping("/infos")
-    public Result medicalOperations() {
+    public BaseResult medicalOperations() {
         List<AccountTbl> result = accountTblService.getInfo();
         if (result != null) {
-            return BaseResult.requestSuccess(result);
+            return ResultUtil.ok(result);
         } else {
             // 测试使用
             log.info("数据获取失败");
-            return BaseResult.requestErr("数据获取失败");
+            return ResultUtil.error("数据获取失败");
         }
     }
 
     /**
      * 测试sharding jdbc跨库操作
-     * @param userId
-     * @param id
      */
     @GetMapping("/info")
-    public Result medicalOperationAndUser(@NotNull(message = "userId不能为空") Long userId, @NotNull(message = "id不能为空") Long id) {
+    public BaseResult info(@NotNull(message = "userId不能为空") Long userId, @NotNull(message = "id不能为空") Long id) {
         AccountTbl accountTbl = accountTblService.getById();
         OrderTbl orderTbl =  orderTblService.getById();
         StockTbl stockTbl = stockTblService.getById();
@@ -78,7 +76,7 @@ public class AdviceController {
         result.put("accountTbl",accountTbl);
         result.put("orderTbl",orderTbl);
         result.put("stockTbl",stockTbl);
-        return BaseResult.requestSuccess(result);
+        return ResultUtil.ok(result);
     }
 
     @GetMapping("/setString")

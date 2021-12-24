@@ -23,43 +23,7 @@ public enum LockEnum {
     /**
      * 任务4
      */
-    LOCK_HOST_INFO("report_host_info", new ReentrantLock()),
-    /**
-     * 任务5
-     */
-    LOCK_APP_DAILY("report_mobile_app_daily", new ReentrantLock()),
-    /**
-     * 任务6
-     */
-    LOCK_ORG_INF("report_org_info", new ReentrantLock()),
-    /**
-     * 任务7
-     */
-    LOCK_PLATFORM("report_platform_info", new ReentrantLock()),
-    /**
-     * 任务8
-     */
-    LOCK_SERVICE_INFO("report_service_info", new ReentrantLock()),
-    /**
-     * 任务9
-     */
-    LOCK_SERVICE_DAILY("report_service_daily", new ReentrantLock()),
-    /**
-     * 任务10
-     */
-    LOCK_TERMINAL_INFO("report_terminal_info", new ReentrantLock()),
-    /**
-     * 任务11
-     */
-    LOCK_TERMINAL_STATUS("report_terminal_status", new ReentrantLock()),
-    /**
-     * 任务12
-     */
-    LOCK_USER_INFO("report_user_info", new ReentrantLock()),
-    /**
-     * 任务13
-     */
-    LOCK_USER_DAILY("report_user_app_daily", new ReentrantLock());
+    LOCK_HOST_INFO("report_host_info", new ReentrantLock());
 
     /**
      * 定时任务key

@@ -3,10 +3,6 @@ server:
   servlet.context-path: /
   tomcat:
     uri-encoding: UTF-8
-    #最小线程数，默认10
-    min-spare-threads: 100
-    #最大线程数，默认200
-    max-threads: 500
     #最大等待队列长度，默认100
     accept-count: 500
 
@@ -18,14 +14,9 @@ spring:
     suffix: .html
     mode: HTML
     cache: false
-  resources:
-    add-mappings: false
-    static-locations: classpath:/static/
   mvc:
     throw-exception-if-no-handler-found: true
     static-path-pattern: /**
-  jackson:
-    default-property-inclusion: non_empty
 
 #mybatis-plus
 mybatis-plus:
