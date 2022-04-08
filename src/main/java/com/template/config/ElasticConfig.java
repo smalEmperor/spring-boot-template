@@ -26,7 +26,7 @@ public class ElasticConfig {
     public RestHighLevelClient restClient() {
 
         //新建host
-        HttpHost httpHost = new HttpHost("172.16.20.74", 9200);
+        HttpHost httpHost = new HttpHost("127.0.0.1", 9200);
 
         //如ES设置了帐号密码，则需要提供登录令牌
         //final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();

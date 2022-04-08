@@ -12,19 +12,19 @@ spring:
       account:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://localhost:3306/account?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
+        jdbc-url: jdbc:mysql://localhost:3306/account?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
         username: root
         password: root
       orders:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://localhost:3306/orders?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
+        jdbc-url: jdbc:mysql://localhost:3306/orders?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
         username: root
         password: root
       stock:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://localhost:3306/stock?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
+        jdbc-url: jdbc:mysql://localhost:3306/stock?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
         username: root
         password: root
       hikari:
@@ -38,18 +38,11 @@ spring:
           actual-data-nodes: orders.orders
         stock:
           actual-data-nodes: stock.stock
-#  data:
-#    mongodb:
-#      uri: mongodb://localhost:27017/mydb
-#    elasticsearch:
-#      cluster-name: elasticsearch
-#      cluster-nodes: 127.0.0.1:9300
-#      properties:
-#      path:
-#        logs: ./elasticsearch/logs
-#        data: ./elasticsearch/data
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/mydb
   redis:
-    host: 172.16.20.74
+    host: 127.0.0.1
     port: 6379
     password:
     timeout: 10000ms
@@ -59,3 +52,27 @@ spring:
         max-active: 8
         max-idle: 8
         min-idle: 0
+  boot:
+    admin:
+      client:
+        url: http://localhost:9091
+
+management:
+#  endpoint:
+#    metrics:
+#      enabled: true
+#    prometheus:
+#      enabled: true
+#  metrics:
+#    export:
+#      prometheus:
+#        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+
+
+
+
