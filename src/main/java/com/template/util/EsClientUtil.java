@@ -41,7 +41,7 @@ import java.util.*;
  * @author df
  */
 @Slf4j
-@Component
+//@Component
 public class EsClientUtil {
 
     @Autowired

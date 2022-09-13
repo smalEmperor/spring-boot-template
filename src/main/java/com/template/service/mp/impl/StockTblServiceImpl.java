@@ -1,9 +1,9 @@
-package com.template.service.impl;
+package com.template.service.mp.impl;
  
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.template.entity.StockTbl;
-import com.template.mapper.StockTblMapper;
-import com.template.service.StockTblService;
+import com.template.entity.mp.StockTbl;
+import com.template.mapper.mp.StockTblMapper;
+import com.template.service.mp.StockTblService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -1,9 +1,9 @@
-package com.template.service.impl;
+package com.template.service.mp.impl;
  
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.template.entity.AccountTbl;
-import com.template.mapper.AccountTblMapper;
-import com.template.service.AccountTblService;
+import com.template.entity.mp.AccountTbl;
+import com.template.mapper.mp.AccountTblMapper;
+import com.template.service.mp.AccountTblService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

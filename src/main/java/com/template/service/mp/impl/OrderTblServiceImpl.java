@@ -1,10 +1,9 @@
-package com.template.service.impl;
- 
+package com.template.service.mp.impl;
+
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.template.entity.AccountTbl;
-import com.template.entity.OrderTbl;
-import com.template.mapper.OrderTblMapper;
-import com.template.service.OrderTblService;
+import com.template.entity.mp.OrderTbl;
+import com.template.mapper.mp.OrderTblMapper;
+import com.template.service.mp.OrderTblService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -23,6 +23,14 @@ public class PageController {
     /**
      * 测试跳转页面
      */
+    @RequestMapping("/file")
+    public String file() {
+        return "file";
+    }
+
+    /**
+     * 测试跳转页面
+     */
     @RequestMapping("/index")
     public String index() {
         return "index";

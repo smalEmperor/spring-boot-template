@@ -49,7 +49,7 @@ public class RedisConfig extends CachingConfigurerSupport {
          *如果有密码：
          *config.useSingleServer().setAddress("redis://120.78.179.242:6379").setPassword("123456")
          **/
-        config.useSingleServer().setAddress("redis://127.0.0.1:6379").setDatabase(1);
+        config.useSingleServer().setAddress("redis://127.0.0.1:6379").setDatabase(0);
         //根据Config创建出RedissonClient示例
         return Redisson.create(config);
     }

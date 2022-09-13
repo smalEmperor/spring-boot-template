@@ -1,5 +1,6 @@
 package com.template;
 
+import cn.easyes.starter.register.EsMapperScan;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -17,7 +18,8 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
  * @date 2019/8/6
  */
 @SpringBootApplication
-@EnableCaching
+//@EnableCaching
+@EsMapperScan("com.template.mapper.es")
 public class Application {
 
     /**

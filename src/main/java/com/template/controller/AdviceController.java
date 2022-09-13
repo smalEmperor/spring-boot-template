@@ -2,12 +2,12 @@ package com.template.controller;
 
 import com.template.common.BaseResult;
 import com.template.common.ResultUtil;
-import com.template.entity.AccountTbl;
-import com.template.entity.OrderTbl;
-import com.template.entity.StockTbl;
-import com.template.service.AccountTblService;
-import com.template.service.OrderTblService;
-import com.template.service.StockTblService;
+import com.template.entity.mp.AccountTbl;
+import com.template.entity.mp.OrderTbl;
+import com.template.entity.mp.StockTbl;
+import com.template.service.mp.AccountTblService;
+import com.template.service.mp.OrderTblService;
+import com.template.service.mp.StockTblService;
 import com.template.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
@@ -22,6 +22,9 @@ import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 测试使用Controller,根据业务自行修改
@@ -30,7 +33,7 @@ import java.util.Map;
  */
 @Validated
 @Slf4j
-@RestController
+//@RestController
 public class AdviceController {
 
     private  static int expireTime = 60;// redis中存储的过期时间 60s
@@ -49,7 +52,7 @@ public class AdviceController {
         this.stockTblService = stockTblService;
     }
 
-    @Resource
+    //@Resource
     private RedisUtil redisUtil;
 
     @Autowired

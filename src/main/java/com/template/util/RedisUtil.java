@@ -16,13 +16,13 @@ import java.util.concurrent.TimeUnit;
  * @author df
  * @date 2019/12/24
  */
-@Component
+//@Component
 @Slf4j
 public class RedisUtil {
 
     private RedisTemplate<String, Object> redisTemplate;
 
-    @Autowired
+    //@Autowired
     public RedisUtil(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }

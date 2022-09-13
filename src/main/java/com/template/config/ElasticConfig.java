@@ -14,15 +14,15 @@ import org.springframework.context.annotation.Configuration;
  * @date 2019/9/7
  */
 
-@Configuration
-@AutoConfigureBefore(RedisConfig.class)
+//@Configuration
+//@AutoConfigureBefore(RedisConfig.class)
 public class ElasticConfig {
 
     /**
      * 使用 restHighLevelClient 客户端
      * 连接的端口是 9200
      */
-    @Bean(name = "restClient")
+    //@Bean(name = "restClient")
     public RestHighLevelClient restClient() {
 
         //新建host

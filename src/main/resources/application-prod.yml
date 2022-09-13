@@ -42,20 +42,20 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/mydb
   redis:
-    host: 127.0.0.1
+    host: 39.105.28.66
     port: 6379
     password:
     timeout: 10000ms
-    database: 1
+    database: 0
     lettuce:
       pool:
         max-active: 8
         max-idle: 8
         min-idle: 0
-  boot:
-    admin:
-      client:
-        url: http://localhost:9091
+#  boot:
+#    admin:
+#      client:
+#        url: http://localhost:9091
 
 management:
 #  endpoint:
@@ -71,6 +71,9 @@ management:
     web:
       exposure:
         include: '*'
+  health:
+    db:
+      enabled: false
 
 
 

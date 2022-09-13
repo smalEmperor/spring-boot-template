@@ -1,6 +1,7 @@
-package com.template.service;
+package com.template.service.mp;
 
-import com.template.entity.OrderTbl;
+
+import com.template.entity.mp.OrderTbl;
 
 /**
  * (OrderTbl)表服务实现类

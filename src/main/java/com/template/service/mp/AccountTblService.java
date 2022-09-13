@@ -1,6 +1,7 @@
-package com.template.service;
+package com.template.service.mp;
 
-import com.template.entity.AccountTbl;
+
+import com.template.entity.mp.AccountTbl;
 
 import java.util.List;
 
