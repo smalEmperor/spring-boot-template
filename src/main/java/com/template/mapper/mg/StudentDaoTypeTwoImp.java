@@ -18,7 +18,7 @@ public class StudentDaoTypeTwoImp implements StudentDaoTypeTwo {
     @Override
     public void addOneStudent(Student student){
         mongoTemplate.save(student);
-
+        // mongoTemplate.insert(student);
     }
 
 //    根据id删除一位学生
