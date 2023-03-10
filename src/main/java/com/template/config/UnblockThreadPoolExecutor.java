@@ -1,5 +1,6 @@
 package com.template.config;
 
+import com.template.entity.MemorySafeLinkedBlockingQueue;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.concurrent.*;
@@ -53,7 +54,7 @@ public class UnblockThreadPoolExecutor {
     public void init() {
         int processors = Runtime.getRuntime().availableProcessors();
         pool = new ThreadPoolExecutor(processors, processors, 60L, TimeUnit.SECONDS,
-                new ArrayBlockingQueue<>(80), new CustomThreadFactory(), new CustomRejectedExecutionHandler());
+                new MemorySafeLinkedBlockingQueue<>(), new CustomThreadFactory(), new CustomRejectedExecutionHandler());
     }
 
     public void destory() {

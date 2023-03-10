@@ -38,6 +38,8 @@ spring:
           actual-data-nodes: orders.orders
         stock:
           actual-data-nodes: stock.stock
+        flyway_schema_history:
+          actual-data-nodes: account.flyway_schema_history
   data:
     mongodb:
       uri: mongodb://localhost:27017/mydb

@@ -5,6 +5,10 @@ server:
     uri-encoding: UTF-8
     #最大等待队列长度，默认100
     accept-count: 500
+    threads:
+      min-spare: 20
+      max: 50
+    max-connections: 1000
 
 spring:
   profiles:
@@ -17,6 +21,15 @@ spring:
   mvc:
     throw-exception-if-no-handler-found: true
     static-path-pattern: /**
+  flyway:
+    enabled: true
+    encoding: UTF-8
+    # 可以支持多个location, 用','隔开
+    locations: classpath:db/migration
+    # migrate是否校验
+    validate-on-migrate: true
+    baseline-on-migrate: true
+    clean-on-validation-error: true
 
 # Sa-Token配置
 sa-token:
