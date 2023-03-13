@@ -24,15 +24,44 @@ public class ApplicationContextHolder implements ApplicationContextAware {
     }
 
     public static <T> T getBean(Class<T> clazz){
+        checkApplicationContext();
         return applicationContext.getBean(clazz);
     }
 
     @SuppressWarnings("unchecked")
     public static <T> T getBean(String name) {
-
-        if (applicationContext == null) {
-            log.info("applicationContext为空");
-        }
+        checkApplicationContext();
         return (T) applicationContext.getBean(name);
+    }
+
+    /**
+     * 根据name和类获取Bean
+     *
+     * @param name  名字
+     * @param clazz 类型
+     * @param <T>   泛型
+     * @return Bean
+     */
+    public static <T> T getBean(String name, Class<T> clazz) {
+        checkApplicationContext();
+        return applicationContext.getBean(name, clazz);
+    }
+
+    /**
+     * 清除applicationContext静态变量.
+     */
+    public static void cleanApplicationContext() {
+        checkApplicationContext();
+        applicationContext = null;
+    }
+
+
+    /**
+     * 检测 checkApplicationContext void
+     */
+    private static void checkApplicationContext() {
+        if (applicationContext == null) {
+            throw new IllegalStateException("applicationContext未注入,请在applicationContext.xml中定义SpringContextHolder");
+        }
     }
 }
