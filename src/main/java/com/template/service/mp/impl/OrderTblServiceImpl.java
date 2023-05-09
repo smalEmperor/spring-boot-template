@@ -1,9 +1,11 @@
 package com.template.service.mp.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.github.benmanes.caffeine.cache.Cache;
 import com.template.entity.mp.OrderTbl;
 import com.template.mapper.mp.OrderTblMapper;
 import com.template.service.mp.OrderTblService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,6 +21,9 @@ public class OrderTblServiceImpl implements OrderTblService {
 
      @Resource
     private OrderTblMapper orderTblMapper;
+
+    @Autowired
+    Cache<String, Object> caffeineCache;
 
     @Override
     public OrderTbl getById() {
